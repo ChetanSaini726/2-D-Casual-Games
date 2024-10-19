@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public Button[] buttons;
+    public Button resetButton;
     public TextMeshProUGUI resultText;
 
     private string currentPlayer;
@@ -20,6 +22,13 @@ public class GameManager : MonoBehaviour
             int index = i;  // Capture the index for the delegate
             buttons[i].onClick.AddListener(() => OnButtonClick(index));
         }
+        resetButton.onClick.AddListener(() => OnResetButton());
+    }
+
+    void OnResetButton()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 
     void OnButtonClick(int index)
